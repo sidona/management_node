@@ -3,6 +3,7 @@
  */
 
 var mongoose     = require('mongoose');
+var Order     = require('./order');
 //var Schema       = mongoose.Schema;
 
 var CustomerSchema=new mongoose.Schema({
@@ -11,11 +12,7 @@ var CustomerSchema=new mongoose.Schema({
     address:{type: String},
     telephone:{type: Number},
     email:{type: String},
-    order: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order'
-    }]
-
+    orders: [Order]
 });
 
 mongoose.model('Customer', CustomerSchema);

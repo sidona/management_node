@@ -23,12 +23,22 @@ router.post('/customer',function (req,res) {
     })
 });
 
-router.get('/customer/:_id',function (req,res) {
-    Customer.findById(req.params._id,function (err,customer) {
-        if(err)
-            res.send(err);
-        res.json(customer);
-    })
+// router.get('/customer/:_id',function (req,res) {
+//     Customer.findById(req.params._id).populate('order').exec(function (err,customer) {
+//         if(err)
+//             res.send(err);
+//         res.json(customer);
+//     })
+// });
+router.get('/customer/:id',function (req,res) {
+    return Customer.findById(new mongoose.Types.ObjectId(req.params.id))
+        .populate('orders')
+        .exec(function (err,customer) {
+            if(err)
+                res.send(err);
+
+            res.json(customer);
+        })
 });
 
 router.put('/customer/:_id',function (req,res) {

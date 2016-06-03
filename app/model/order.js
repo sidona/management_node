@@ -6,11 +6,20 @@ var Schema = mongoose.Schema;
 
 var OrderSchema = new Schema({
     products: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        },
+        quantity: {
+            type: mongoose.Schema.Types.Number
+        }
     }],
-    quantity_requested:{type:Number,default:0},
+    customer:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Customer'
+    },
     total: {type: Number, default: 0},
+    confirmed: {type: Boolean, default: false},
     created: {type: Date},
     modified: {type: Date, default: Date.now}
 });

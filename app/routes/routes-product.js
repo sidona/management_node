@@ -16,8 +16,12 @@ router.get('/product',function (req,res) {
 
 router.post('/product',function (req,res) {
     var product=new Product(req.body);
+    product.name=req.body.name;
+    product.quantity=req.body.quantity;
+    product.price=req.body.price;
+    product.stock+=product.quantity;
     product.created=Date.now();
-   //product.modified=Date.now();
+
     product.save(function (err) {
         if(err)
             res.send(err);
@@ -40,7 +44,7 @@ router.put('/product/:_id',function (req,res) {
         product.name=req.body.name;
         product.quantity=req.body.quantity;
         product.price=req.body.price;
-        product.stock=req.body.stock;
+        product.stock+=product.quantity;
         product.modified=Date.now();
         
         product.save(function (err) {
